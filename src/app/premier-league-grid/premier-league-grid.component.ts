@@ -1,7 +1,7 @@
 import { FootballDataService } from './../football-data.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, GridOptions } from 'ag-grid-community';
 import { rowData } from '../dummy.data';
 @Component({
   selector: 'app-premier-league-grid',
@@ -28,9 +28,25 @@ export class PremierLeagueGridComponent implements OnInit {
     pagination: true,
     paginationPageSize: 17,
     rowSelection: 'multiple',
+    onSelectionChanged: this.onSelectionChanged.bind(this),
+    contextMenu: {
+      items: [
+        {
+          name: 'Custom Action',
+          action: this.clearCell.bind(this),
+        },
+      ],
+    },
   };
 
-  constructor(private footballDataService: FootballDataService) {}
+  constructor() {}
 
   ngOnInit() {}
+
+  onSelectionChanged() {
+    const selectedRows = this.gridOptions.api?.getSelectedRows();
+    console.log(selectedRows);
+  }
+
+  clearCell() {}
 }
