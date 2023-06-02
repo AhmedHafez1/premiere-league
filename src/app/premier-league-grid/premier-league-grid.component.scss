@@ -1,0 +1,10 @@
+ag-grid-angular {
+  width: 67%;
+  height: 830px;
+  text-align: center;
+  margin: 20px auto;
+}
+
+:host(::ng-deep) .ag-header-cell-label {
+  justify-content: center;
+}

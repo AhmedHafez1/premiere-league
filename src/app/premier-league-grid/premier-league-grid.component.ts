@@ -19,7 +19,7 @@ export class PremierLeagueGridComponent implements OnInit {
   ];
   gridOptions: any = {
     pagination: true,
-    paginationPageSize: 10,
+    paginationPageSize: 17,
     rowSelection: 'multiple',
   };
 
