@@ -1,3 +1,4 @@
+import { FootballDataService } from './../football-data.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ColDef } from 'ag-grid-community';
@@ -17,13 +18,19 @@ export class PremierLeagueGridComponent implements OnInit {
     { headerName: 'Losses', field: 'overall_league_L' },
     { headerName: 'Points', field: 'overall_league_PTS' },
   ];
+
+  defaultColDef: ColDef = {
+    sortable: true,
+    filter: true,
+  };
+
   gridOptions: any = {
     pagination: true,
     paginationPageSize: 17,
     rowSelection: 'multiple',
   };
 
-  constructor() {}
+  constructor(private footballDataService: FootballDataService) {}
 
   ngOnInit() {}
 }

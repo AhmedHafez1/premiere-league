@@ -112,7 +112,7 @@ export const rowData = [
     overall_league_PTS: 19,
   },
   {
-    _name: 'Fulham',
+    team_name: 'Fulham',
     overall_league_position: 15,
     overall_league_W: 3,
     overall_league_D: 9,
