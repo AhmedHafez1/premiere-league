@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { PremierLeagueGridComponent } from './premier-league-grid/premier-league-grid.component';
-
+import 'ag-grid-enterprise';
 @NgModule({
   declarations: [AppComponent, PremierLeagueGridComponent],
   imports: [BrowserModule, HttpClientModule, AgGridModule],
