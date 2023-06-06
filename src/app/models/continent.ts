@@ -7,5 +7,5 @@ export interface Continent {
   area: number;
   location: string;
   population: number;
-  countries: Country[];
+  children: Country[];
 }

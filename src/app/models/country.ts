@@ -3,4 +3,5 @@ export interface Country {
   area: number;
   location: string;
   population: number;
+  orgHierarchy?: string[];
 }

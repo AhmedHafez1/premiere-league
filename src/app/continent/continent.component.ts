@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContinentService } from '../services/continent.service';
 import { Continent, Country } from '../models';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-continent',
@@ -8,33 +9,56 @@ import { Continent, Country } from '../models';
   styleUrls: ['./continent.component.scss'],
 })
 export class ContinentComponent implements OnInit {
-  continents: Continent[] = [];
+  continents: (Continent & { orgHierarchy: string[] })[] = [];
   columnDefs: any[];
+  defaultColDef: any;
 
   constructor(private continentService: ContinentService) {
     this.columnDefs = [
-      { headerName: 'Continent', field: 'name' },
-      { headerName: 'Number of Countries', field: 'numberOfCountries' },
-      { headerName: 'Number of Deserts', field: 'numberOfDeserts' },
+      {
+        headerName: 'Name',
+        field: 'name',
+        filter: true,
+        cellRenderer: 'agGroupCellRenderer',
+        cellRendererParams: {
+          suppressCount: true,
+        },
+      },
+      { headerName: 'Countries', field: 'numberOfCountries' },
+      { headerName: 'Deserts', field: 'numberOfDeserts' },
       { headerName: 'Area', field: 'area' },
       { headerName: 'Location', field: 'location' },
       { headerName: 'Population', field: 'population' },
-      {
-        headerName: 'Country',
-        field: 'countries',
-        valueGetter: this.getCountryNames,
-      },
     ];
+
+    this.defaultColDef = {
+      flex: 1,
+      minWidth: 150,
+      resizable: true,
+    };
   }
+
+  autoGroupColumnDef = {
+    field: 'name',
+    minWidth: 250,
+    cellRendererParams: {
+      suppressCount: true,
+    },
+  };
 
   ngOnInit() {
-    this.continentService.getContinents().subscribe((continents) => {
-      this.continents = continents;
-    });
+    this.continentService
+      .getContinents()
+      .pipe(
+        map((continents) =>
+          continents.map((c) => ({ ...c, orgHierarchy: [c.name] }))
+        )
+      )
+      .subscribe((continents) => {
+        this.continents = continents;
+        console.log(continents);
+      });
   }
 
-  getCountryNames(params: any) {
-    const countries: Country[] = params.data.countries;
-    return countries.map((country) => country.name).join(', ');
-  }
+  getDataPath = (data: any) => data.orgHierarchy || null;
 }
