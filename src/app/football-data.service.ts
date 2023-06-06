@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FootballDataService {
-
-  constructor() { }
+  constructor(private http: HttpClient) {}
 }

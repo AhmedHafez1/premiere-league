@@ -6,6 +6,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { PremierLeagueGridComponent } from './premier-league-grid/premier-league-grid.component';
 import { ContinentComponent } from './continent/continent.component';
 
+import 'ag-grid-enterprise';
 @NgModule({
   declarations: [AppComponent, PremierLeagueGridComponent, ContinentComponent],
   imports: [BrowserModule, HttpClientModule, AgGridModule],
